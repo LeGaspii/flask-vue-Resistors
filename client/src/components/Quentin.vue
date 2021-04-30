@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <button type="button" class="btn btn-primary p-4">{{ msg }}</button>
+    <button type="button" class="btn btn-primary p-4">{{ msg[0] }}</button>
+    <button type="button" class="btn btn-warning p-4">{{ msg[1] }}</button>
   </div>
 </template>
 
@@ -8,7 +9,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Ping',
+  name: 'Quentin',
   data() {
     return {
       msg: '',
@@ -16,7 +17,7 @@ export default {
   },
   methods: {
     getMessage() {
-      const path = 'http://localhost:5000/ping';
+      const path = 'http://localhost:5000/quentin';
       axios.get(path)
         .then((res) => {
           this.msg = res.data;
