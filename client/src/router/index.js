@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Books from '../components/Books.vue';
+// import Books from '../components/Books.vue';
 import Ping from '../components/Ping.vue';
 import Quentin from '../components/Quentin.vue';
+import Home from '../views/Home.vue';
 
 Vue.use(Router);
 
@@ -12,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Books',
-      component: Books,
+      name: 'Home',
+      component: Home,
     },
     {
       path: '/ping',
