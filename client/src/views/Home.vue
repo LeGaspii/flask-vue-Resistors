@@ -70,41 +70,29 @@ export default ({
   methods: {
     resistanceValues() {
       document.querySelectorAll('#table tr').forEach((e) => { e.remove(); });
-
-      const val = parseFloat(document.getElementById('myNumber').value, 10);
-      // const closestValuesForE = {
-      //   keys: [12, 24, 48, 96, 192],
-      //   EList: ['E12', 'E24', 'E48', 'E96', 'E192'],
-      //   values: [0, 0, 0, 0, 0],
-      // };
-
       let arrayE = [];
       let i;
-      console.log(this.closestValuesForE.keys);
+      let t;
       // eslint-disable-next-line no-restricted-syntax
       for (i in this.closestValuesForE.keys) {
         if (i) {
           const E = this.closestValuesForE.keys[i];
-          console.log(E);
-          for (i = 0; i <= E; i += 1) {
+          for (t = 0; t <= E; t += 1) {
             if (E <= 24) {
-              arrayE[arrayE.length] = Math.round((10 ** (i / E)) * 10) / 10;
-              console.log('inf 24', arrayE[arrayE.length]);
+              arrayE[arrayE.length] = Math.round((10 ** (t / E)) * 10) / 10;
             } else {
-              arrayE[arrayE.length] = Math.round((10 ** (i / E)) * 100) / 100;
-              console.log(arrayE[arrayE.length]);
+              arrayE[arrayE.length] = Math.round((10 ** (t / E)) * 100) / 100;
             }
           }
-          console.log('val:', val);
-          this.closestValuesForE.values[i] = this.closest(arrayE, val, false);
+          this.closestValuesForE.values[i] = this.closest(arrayE, this.ResistValue, false);
           arrayE = [];
         }
       }
 
       this.addARow('series', 'Series', this.closestValuesForE.EList);
-      //   _ = this.closest(closestValuesForE.values, val, true);
+      this.closest(this.closestValuesForE.values, this.ResistValue, true);
       this.addARow('results', 'Closest value for each series', this.closestValuesForE.values);
-      this.addARow('results', '%error', this.error(this.closestValuesForE.values, val));
+      this.addARow('results', '%error', this.error(this.closestValuesForE.values, this.ResistValue));
       document.querySelectorAll('#table td').forEach((e) => { e.classList.add('border-4', 'px-4', 'py-4'); });
       document.querySelectorAll('#series td').forEach((e) => { e.classList.add('bg-yellow-200'); });
     },
@@ -115,7 +103,6 @@ export default ({
       let ans;
       let savedI = 0;
       const closestRow = [0, 0, 0, 0, 0];
-      console.log('inside closest');
       // eslint-disable-next-line no-restricted-syntax
       for (i in array) {
         if (i) {
